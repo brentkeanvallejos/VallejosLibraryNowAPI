@@ -12,7 +12,7 @@ RUN dotnet publish "VallejosLibraryNowAPI/VallejosLibraryNowAPI.csproj" -c Relea
 FROM	base AS final
 WORKDIR /app
 COPY --from=build /app/out .
-ENTRYPOINT ["dotnet","VllejosLibraryNowAPI.dll"]
+ENTRYPOINT ["dotnet","VallejosLibraryNowAPI.dll"]
 
 
 
