@@ -7,7 +7,7 @@ FROM	mcr.mir=crosoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /src
 COPY . .
 RUN dotnet restore "VallejosLibraryNowAPI.csproj"
-RUN dotnet publish "VallejosLibraryNowAPI.csproj" -c Release -o /app/out
+RUN dotnet publish "VallejosLibraryNowAPI.csproj"-c Release -o /app/out
 
 FROM	mcr.mir=crosoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
