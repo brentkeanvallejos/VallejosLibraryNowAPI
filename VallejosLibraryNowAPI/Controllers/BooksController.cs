@@ -1,9 +1,5 @@
 ﻿using VallejosLibraryNowAPI.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 
 namespace VallejosLibraryNowAPI.Controllers
 {
@@ -51,9 +47,9 @@ namespace VallejosLibraryNowAPI.Controllers
             {
                 return NotFound(new
                 {
-                    status = "success",
-                    data = book,
-                    message = "Books not found"
+                    status = "error",
+                    data = (object?)null,
+                    message = "Book not found"
                 });
             }
             return Ok(new
@@ -67,18 +63,19 @@ namespace VallejosLibraryNowAPI.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Book newBook)
         {
-            newBook.Id = books.Count + 1;
+            // assign a new Id based on current max to avoid duplicates after deletions
+            newBook.Id = books.Any() ? books.Max(b => b.Id) + 1 : 1;
             books.Add(newBook);
             return CreatedAtAction(nameof(GetId),
                 new { id = newBook.Id },
                 new
                 {
-                    status = "SUccess",
+                    status = "success",
                     data = newBook,
                     message = "Book Created"
                 });
         }
-        [HttpPut("(id)")]
+        [HttpPut("{id}")]
         public IActionResult Update(int id,
             [FromBody] Book updateBook)
         {
@@ -86,7 +83,7 @@ namespace VallejosLibraryNowAPI.Controllers
             if (book == null)
                 return NotFound(new
                 {
-                    status = "success",
+                    status = "error",
                     data = (object?)null,
                 });
             book.Title = updateBook.Title;
@@ -102,7 +99,7 @@ namespace VallejosLibraryNowAPI.Controllers
                 message = "Book updated"
             });
         }
-        [HttpDelete("(id)")]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var book = books.FirstOrDefault(x => x.Id == id);
