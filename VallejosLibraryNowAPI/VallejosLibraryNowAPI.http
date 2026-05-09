@@ -1,0 +1,6 @@
+@VallejosLibraryNowAPI_HostAddress = http://localhost:5194
+
+GET {{VallejosLibraryNowAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
