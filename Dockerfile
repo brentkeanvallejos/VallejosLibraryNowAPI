@@ -3,7 +3,7 @@ WORKDIR /app
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 
-FROM	mcr.mir=crosoft.com/dotnet/aspnet:8.0 AS base
+FROM	mcr.mir=crosoft.com/dotnet/aspnet:8.0 AS build
 WORKDIR /src
 COPY . .
 RUN dotnet restore "VallejosLibraryNowAPI/VallejosLibraryNowAPI.csproj"
