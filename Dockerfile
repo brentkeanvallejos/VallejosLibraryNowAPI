@@ -9,7 +9,7 @@ COPY . .
 RUN dotnet restore "VallejosLibraryNowAPI/VallejosLibraryNowAPI.csproj"
 RUN dotnet publish "VallejosLibraryNowAPI/VallejosLibraryNowAPI.csproj" -c Release -o /app/out
 
-FROM	mcr.mir=crosoft.com/dotnet/aspnet:8.0 AS base
+FROM	base AS final
 WORKDIR /app
 COPY --from=build /app/out .
 ENTRYPOINT ["dotnet","VllejosLibraryNowAPI.dll"]
