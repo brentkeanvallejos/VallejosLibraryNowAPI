@@ -7,7 +7,7 @@ FROM	mcr.mir=crosoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY . .
 RUN dotnet restore "VallejosLibraryNowAPI/VallejosLibraryNowAPI.csproj"
-RUN dotnet publish "VallejosLibraryNowAPI/VallejosLibraryNowAPI.csproj"  -c Release  -o /app/out
+RUN dotnet publish "VallejosLibraryNowAPI/VallejosLibraryNowAPI.csproj" -c Release  -o /app/out
 
 FROM	base AS final
 WORKDIR /app
